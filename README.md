@@ -12,6 +12,22 @@ The Teslo shop API description
 $ npm install
 ```
 
+## Running the app docker
+
+Database up
+
+```bash
+$ docker-compose up
+```
+o
+```bash
+$ docker-compose up -d
+```
+
+Clonar el archivo __.env.template__ y renombrar la copia a __.env__
+
+Llenar las variables de entorno definidas en el __.env__
+
 ## Running the app
 
 ```bash
