@@ -12,7 +12,11 @@ The Teslo shop API description
 $ npm install
 ```
 
-## Running the app docker
+Clonar el archivo __.env.template__ y renombrar la copia a __.env__
+
+Llenar las variables de entorno definidas en el __.env__
+
+## Database docker
 
 Database up
 
@@ -24,9 +28,9 @@ o
 $ docker-compose up -d
 ```
 
-Clonar el archivo __.env.template__ y renombrar la copia a __.env__
+## Database not docker
 
-Llenar las variables de entorno definidas en el __.env__
+Create Database "```DB_NAME```" in PostgresSql
 
 ## Running the app
 
@@ -44,3 +48,4 @@ $ npm run start:prod
 # Stack usado
 * Nest Js
 * Docker - DockerCompose
+* PostgresSql
