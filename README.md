@@ -43,3 +43,4 @@ $ npm run start:prod
 
 # Stack usado
 * Nest Js
+* Docker - DockerCompose
