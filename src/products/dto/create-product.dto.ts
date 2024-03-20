@@ -50,7 +50,7 @@ export class CreateProductDto {
     stock?: number;
 
     @ApiProperty({
-        example: ['test'],
+        example: ['SM', 'M', 'L'],
         description: 'Sizes',
         required: true
     })
@@ -65,4 +65,14 @@ export class CreateProductDto {
     })
     @IsIn(['men', 'women', 'kid', 'unisex'])
     gender: string;
+
+    @ApiProperty({
+        example: ['shirt'],
+        description: 'Tags',
+        required: true
+    })
+    @IsString({ each: true })
+    @IsArray()
+    @IsOptional()
+    tags?: string[];
 }
