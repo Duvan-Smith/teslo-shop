@@ -18,15 +18,15 @@ export class ProductsController {
   }
 
   @Get()
-  @ApiResponse({ status: 200, description: 'Product was findAll', type: [Product] })
+  @ApiResponse({ status: 200, description: 'Product findAll', type: [Product] })
   findAll(@Query() paginationDto: PaginationDto) {
     return this.productsService.findAll(paginationDto);
   }
 
-  @Get(':id')
-  @ApiResponse({ status: 200, description: 'Product was findOne id', type: Product })
-  findOne(@Param('id', ParseUUIDPipe) id: string) {
-    return this.productsService.findOne(id);
+  @Get(':term')
+  @ApiResponse({ status: 200, description: 'Product findOne id', type: Product })
+  findOne(@Param('term') term: string) {
+    return this.productsService.findOne(term);
   }
 
   @Patch(':id')
