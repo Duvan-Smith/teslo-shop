@@ -1,5 +1,6 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { BeforeInsert, BeforeUpdate, Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Product } from "./product.entity";
 
 @Entity()
 export class ProductImage {
@@ -20,4 +21,10 @@ export class ProductImage {
         unique: true
     })
     url: string;
+
+    @ManyToOne(
+        () => Product,
+        (product) => product.images
+    )
+    product: Product
 }
