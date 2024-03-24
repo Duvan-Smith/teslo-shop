@@ -69,10 +69,20 @@ export class CreateProductDto {
     @ApiProperty({
         example: ['shirt'],
         description: 'Tags',
-        required: true
+        required: false
     })
     @IsString({ each: true })
     @IsArray()
     @IsOptional()
     tags?: string[];
+
+    @ApiProperty({
+        example: ['https://image1.com', 'https://image2.com'],
+        description: 'Images',
+        required: false
+    })
+    @IsString({ each: true })
+    @IsArray()
+    @IsOptional()
+    images?: string[];
 }

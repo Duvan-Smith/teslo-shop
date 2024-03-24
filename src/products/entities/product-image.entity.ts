@@ -17,9 +17,7 @@ export class ProductImage {
         description: 'url',
         required: true
     })
-    @Column('text', {
-        unique: true
-    })
+    @Column('text')
     url: string;
 
     @ManyToOne(
