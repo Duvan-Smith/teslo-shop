@@ -153,4 +153,17 @@ export class ProductsService {
       images: images.map(image => image.url)
     }
   }
+
+  async deleteAllProucts() {
+    const query = this.productRepository.createQueryBuilder('product');
+
+    try {
+      return await query
+        .delete()
+        .where({})
+        .execute();
+    } catch (error) {
+      this.handleExecptions(error);
+    }
+  }
 }
