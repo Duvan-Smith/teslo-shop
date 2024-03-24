@@ -65,17 +65,20 @@ export class ProductsService {
         product = await this.productRepository.findOneBy({ id: term });
 
       if (!product) {
-        const queryBuilder = this.productRepository.createQueryBuilder();
+        const queryBuilder = this.productRepository.createQueryBuilder('prod');
         product = await queryBuilder
           .where(`UPPER(title) =:title or slug =:slug`, {
             title: term.toUpperCase(),
             slug: term.toLowerCase(),
-          }).getOne();
+          })
+          .leftJoinAndSelect('prod.images', 'prodImages')
+          .getOne();
       }
 
       if (!product)
         throw new NotFoundException(`product with "${term}" not found`);
 
+      // return { ...product, images: product.images.map(image => image.url) };
       return product;
     } catch (error) {
       this.handleExecptions(error);
@@ -121,5 +124,14 @@ export class ProductsService {
 
     this.logger.error(error);
     throw new InternalServerErrorException('Unexpected error, check server logs');
+  }
+
+  async findOnePlain(term: string) {
+    const { images = [], ...rest } = await this.findOne(term);
+
+    return {
+      ...rest,
+      images: images.map(image => image.url)
+    }
   }
 }

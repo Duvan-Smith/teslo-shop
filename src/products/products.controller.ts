@@ -26,7 +26,7 @@ export class ProductsController {
   @Get(':term')
   @ApiResponse({ status: 200, description: 'Product findOne id', type: Product })
   findOne(@Param('term') term: string) {
-    return this.productsService.findOne(term);
+    return this.productsService.findOnePlain(term);
   }
 
   @Patch(':id')
