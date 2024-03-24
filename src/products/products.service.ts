@@ -38,10 +38,20 @@ export class ProductsService {
   async findAll(paginationDto: PaginationDto) {
     try {
       const { limit = 5, offset = 0 } = paginationDto;
-      return await this.productRepository.find({
+
+      // return 
+      const products = await this.productRepository.find({
         take: limit,
-        skip: offset
+        skip: offset,
+        relations: {
+          images: true
+        }
       });
+
+      return products.map(({ images, ...rest }) => ({
+        ...rest,
+        images: images.map(img => img.url)
+      }))
     } catch (error) {
       this.handleExecptions(error);
     }
