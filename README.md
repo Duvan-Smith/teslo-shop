@@ -45,6 +45,11 @@ $ npm run start:dev
 $ npm run start:prod
 ```
 
+## Ejecutar SEED
+```bash
+http://localhost:3000/api/seed
+```
+
 # Stack usado
 * Nest Js
 * Docker - DockerCompose
