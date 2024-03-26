@@ -22,7 +22,9 @@ export class User {
     fullName: string;
 
     @ApiProperty()
-    @Column('bool')
+    @Column('bool', {
+        default: true
+    })
     isActive: boolean;
 
     @ApiProperty()
