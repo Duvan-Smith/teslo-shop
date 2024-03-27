@@ -3,6 +3,8 @@ import { AuthService } from './auth.service';
 import { ApiTags } from '@nestjs/swagger';
 import { CreateUserDto, LoginUserDto } from './dto';
 import { AuthGuard } from '@nestjs/passport';
+import { User } from './entities/user.entity';
+import { GetUser } from './decorators/get-user.decorator';
 
 @ApiTags('Auth')
 @Controller('auth')
@@ -22,9 +24,8 @@ export class AuthController {
   @Get('private')
   @UseGuards(AuthGuard())
   testingPrivateRoute(
-    @Req() request: Express.Request
+    @GetUser() user: User
   ) {
-    const { user } = request;
     return {
       ok: true,
       msg: 'Hola mundo Private',
