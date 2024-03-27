@@ -1,4 +1,4 @@
-import { Controller, Post, Body, Get, UseGuards } from '@nestjs/common';
+import { Controller, Post, Body, Get, UseGuards, Req } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { ApiTags } from '@nestjs/swagger';
 import { CreateUserDto, LoginUserDto } from './dto';
@@ -21,10 +21,14 @@ export class AuthController {
 
   @Get('private')
   @UseGuards(AuthGuard())
-  testingPrivateRoute() {
+  testingPrivateRoute(
+    @Req() request: Express.Request
+  ) {
+    const { user } = request;
     return {
       ok: true,
-      msg: 'Hola mundo Private'
+      msg: 'Hola mundo Private',
+      user
     };
   }
 }
