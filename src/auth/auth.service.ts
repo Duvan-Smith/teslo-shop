@@ -18,26 +18,23 @@ export class AuthService {
   ) { }
 
   async login(loginUserDto: LoginUserDto) {
-    try {
-      const { password, email } = loginUserDto;
-      const user = await this.userRepository.findOne({
-        where: { email },
-        select: { email: true, password: true, id: true }
-      });
+    const { password, email } = loginUserDto;
 
-      if (!user)
-        throw new UnauthorizedException('Credential are not valid');
+    const user = await this.userRepository.findOne({
+      where: { email },
+      select: { email: true, password: true, id: true }
+    });
 
-      if (!bcrypt.compareSync(password, user.password))
-        throw new UnauthorizedException('Credential are not valid');
+    if (!user || user === null)
+      throw new UnauthorizedException('Credential are not valid');
 
-      return {
-        ...user,
-        token: this.getJwtToken({ id: user.id, email: user.email })
-      };
-    } catch (error) {
-      this.handleDBErrors(error);
-    }
+    if (!bcrypt.compareSync(password, user.password))
+      throw new UnauthorizedException('Credential are not valid');
+
+    return {
+      ...user,
+      token: this.getJwtToken({ id: user.id, email: user.email })
+    };
   }
 
   async create(createUserDto: CreateUserDto) {

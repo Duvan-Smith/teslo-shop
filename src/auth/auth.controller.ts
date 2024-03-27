@@ -56,8 +56,6 @@ export class AuthController {
     };
   }
 
-  
-
   @Get('private3')
   @Auth(ValidRoles.admin, ValidRoles.superUser)
   testingPrivateRoute3(
